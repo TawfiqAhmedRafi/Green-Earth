@@ -1,0 +1,14 @@
+
+.geist-font {
+  font-family: "Geist", sans-serif;
+
+}
+
+.inter-font {
+  font-family: "Inter", sans-serif;
+  
+}
+.active{
+    background-color: #15803d;
+    color: white;
+}
