@@ -4,7 +4,7 @@ Welcome to the Green Earth project!
 
 ## Live Website
 
-Visit the live website here: [Green Earth Live Site](https://tawfiqahmedrafi.github.io/Green-Earth/)
+Visit the live website here: [Green Earth Live Site](https://green-earth-rafi.netlify.app/)
 
 ## About
 
