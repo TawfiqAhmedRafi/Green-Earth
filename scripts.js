@@ -77,7 +77,7 @@ const card = document.createElement("div");
 card.innerHTML=`
                 <div class=" bg-white mt-3 md:mt-0 p-4 rounded-lg inter-font">
                     <img class="rounded-lg min-h-[180px] max-h-[180px] w-full object-cover" src="${tree.image}" alt="">
-                    <p onclick="loadTreeDetail(${tree.id})" class="mt-2 font-bold text-xl">${tree.name}</p>
+                    <p onclick="loadTreeDetail(${tree.id})" class="mt-2 font-bold text-xl cursor-pointer">${tree.name}</p>
                     <p class="mt-2 text-[#1f2937] text-[12px] line-clamp-2">${tree.description}
                     </p>
                     <div class=" flex justify-between items-center mt-2">
@@ -197,7 +197,7 @@ const card = document.createElement("div");
 card.innerHTML=`
                 <div class=" bg-white mt-3 md:mt-0 p-4 rounded-lg inter-font">
                     <img class="rounded-lg min-h-[180px] max-h-[180px] w-full object-cover" src="${plant.image}" alt="">
-                    <p onclick="loadTreeDetail(${plant.id})" class="mt-2 font-bold text-xl">${plant.name}</p>
+                    <p onclick="loadTreeDetail(${plant.id})" class="mt-2 font-bold text-xl cursor-pointer">${plant.name}</p>
                     <p class="mt-2 text-[#1f2937] text-[12px] line-clamp-2">${plant.description}
                     </p>
                     <div class=" flex justify-between items-center mt-2">
