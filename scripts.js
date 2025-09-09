@@ -65,33 +65,45 @@ const displayTreeDetail =(plant)=>{
 
 }
 // display category tree
-const displayCategoryTree=(trees)=>{
- 
-//  1.get the container and clear
-const treecontainer = document.getElementById("tree-container");
-treecontainer.innerHTML="";
-// 2. get into every category
-trees.forEach(tree=>{
-// 3. create element
-const card = document.createElement("div");
-card.innerHTML=`
-                <div class=" bg-white mt-3 md:mt-0 p-4 rounded-lg inter-font">
-                    <img class="rounded-lg min-h-[180px] max-h-[180px] w-full object-cover" src="${tree.image}" alt="">
-                    <p onclick="loadTreeDetail(${tree.id})" class="mt-2 font-bold text-xl cursor-pointer">${tree.name}</p>
-                    <p class="mt-2 text-[#1f2937] text-[12px] line-clamp-2">${tree.description}
-                    </p>
-                    <div class=" flex justify-between items-center mt-2">
-                        <button class="btn rounded-3xl text-[#15803D]  bg-[#DCFCE7] geist-font text-[12px]">${tree.category}</button>
-                        <p class="font-semibold mr-2 text-[12px]"> <span class="font-extrabold">৳</span> ${tree.price}</p>
-                    </div>
-                 <button onclick="loadCart(${tree.id})" class="btn w-full rounded-3xl mt-2 bg-[#15803d] text-white" id="add-${tree.id}">Add to card</button>
+const displayCategoryTree = (trees) => {
+    const treecontainer = document.getElementById("tree-container");
+    treecontainer.innerHTML = "";
+
+    trees.forEach(tree => {
+        const card = document.createElement("div");
+        card.innerHTML = `
+            <div class="bg-white mt-3 md:mt-0 p-4 rounded-lg inter-font">
+                <img class="rounded-lg min-h-[180px] max-h-[180px] w-full object-cover" src="${tree.image}" alt="">
+                <p onclick="loadTreeDetail(${tree.id})" class="mt-2 font-bold text-xl cursor-pointer">${tree.name}</p>
+                <p class="mt-2 text-[#1f2937] text-[12px] line-clamp-2">${tree.description}</p>
+                <div class="flex justify-between items-center mt-2">
+                    <button class="btn rounded-3xl text-[#15803D] bg-[#DCFCE7] geist-font text-[12px]">${tree.category}</button>
+                    <p class="font-semibold mr-2 text-[12px]"> <span class="font-extrabold">৳</span> ${tree.price}</p>
                 </div>
-`
-// 4. append
-treecontainer.append(card)
-});
-manageSpinner(false);
+                <button class="btn w-full rounded-3xl mt-2 bg-[#15803d] text-white add-to-cart-btn" data-id="${tree.id}" data-name="${tree.name}">
+                    Add to cart
+                </button>
+            </div>
+        `;
+        treecontainer.append(card);
+    });
+
+    // Attach alert + loadCart behavior
+    const addBtns = treecontainer.querySelectorAll(".add-to-cart-btn");
+    addBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const treeName = btn.getAttribute("data-name");
+            const treeId = btn.getAttribute("data-id");
+
+            if (confirm(`${treeName} added to the cart!`)) {
+                loadCart(treeId);
+            }
+        });
+    });
+
+    manageSpinner(false);
 }
+
 //load cart
 const loadCart=async(id)=>{
     const url=`https://openapi.programming-hero.com/api/plant/${id}`
@@ -112,7 +124,7 @@ const displaycart=(plant)=>{
                     <p class="text-[#8C8C8C] pt-1.5">৳ <span>${plant.price}</span> x 1</p>
                     </div>
                     <div>
-                        <i class="fa-solid fa-xmark text-[#8C8C8C] cursor-pointer remove-btn"></i>
+                        <i class="fa-solid fa-xmark text-[#8C8C8C]  cursor-pointer remove-btn"></i>
                     </div>
                 </div>
 `
@@ -186,32 +198,44 @@ const loadAllTree=()=>{
     .then((json)=> displayAllTree(json.plants))
 }
 // `display all tree
-const displayAllTree=(plants)=>{
-    //  1.get the container and clear
-const treecontainer = document.getElementById("tree-container");
-treecontainer.innerHTML="";
-// 2. get into every category
-plants.forEach(plant=>{
-// 3. create element
-const card = document.createElement("div");
-card.innerHTML=`
-                <div class=" bg-white mt-3 md:mt-0 p-4 rounded-lg inter-font">
-                    <img class="rounded-lg min-h-[180px] max-h-[180px] w-full object-cover" src="${plant.image}" alt="">
-                    <p onclick="loadTreeDetail(${plant.id})" class="mt-2 font-bold text-xl cursor-pointer">${plant.name}</p>
-                    <p class="mt-2 text-[#1f2937] text-[12px] line-clamp-2">${plant.description}
-                    </p>
-                    <div class=" flex justify-between items-center mt-2">
-                        <button class="btn rounded-3xl text-[#15803D]  bg-[#DCFCE7] geist-font text-[12px]">${plant.category}</button>
-                        <p class="font-semibold mr-2 text-[12px]"> <span class="font-extrabold">৳</span> ${plant.price}</p>
-                    </div>
-                    <button onclick="loadCart(${plant.id})" class="btn w-full rounded-3xl mt-2 bg-[#15803d] text-white" id="add-${plant.id}">Add to card</button>
+const displayAllTree = (plants) => {
+    const treecontainer = document.getElementById("tree-container");
+    treecontainer.innerHTML = "";
+
+    plants.forEach(plant => {
+        const card = document.createElement("div");
+        card.innerHTML = `
+            <div class="bg-white mt-3 md:mt-0 p-4 rounded-lg inter-font">
+                <img class="rounded-lg min-h-[180px] max-h-[180px] w-full object-cover" src="${plant.image}" alt="">
+                <p onclick="loadTreeDetail(${plant.id})" class="mt-2 font-bold text-xl cursor-pointer">${plant.name}</p>
+                <p class="mt-2 text-[#1f2937] text-[12px] line-clamp-2">${plant.description}</p>
+                <div class="flex justify-between items-center mt-2">
+                    <button class="btn rounded-3xl text-[#15803D] bg-[#DCFCE7] geist-font text-[12px]">${plant.category}</button>
+                    <p class="font-semibold mr-2 text-[12px]"> <span class="font-extrabold">৳</span> ${plant.price}</p>
                 </div>
-`
-// 4. append
-treecontainer.append(card)
-});
-manageSpinner(false);
+                <button class="btn w-full rounded-3xl mt-2 bg-[#15803d] text-white add-to-cart-btn" data-id="${plant.id}" data-name="${plant.name}">
+                    Add to cart
+                </button>
+            </div>
+        `;
+        treecontainer.append(card);
+    });
+
+    const addBtns = treecontainer.querySelectorAll(".add-to-cart-btn");
+    addBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const plantName = btn.getAttribute("data-name");
+            const plantId = btn.getAttribute("data-id");
+
+            if (confirm(`${plantName} added to the cart!`)) {
+                loadCart(plantId);
+            }
+        });
+    });
+
+    manageSpinner(false);
 }
+
 // button prevent
 const form = document.getElementById("tree-form");
 
